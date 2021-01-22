@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+    <h1>Todo-list</h1>
+    <%- include("./addTask.ejs") %> 
+    <% for (let i = 0; i < data.length; i++) { %>
+        <div>
+            <b><%= data[i].name %></b>
+            <% if (data[i].done == true) { %>
+                <span>done</span>
+            <% } %> 
+            <a href="/delete/<%=data[i]._id%>">Ta bort</a>
+        </div>
+    <% } %>
+</body>
+</html>
