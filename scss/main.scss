@@ -1,0 +1,87 @@
+body {
+    background-color: #e4ded4;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 150%;
+    color: #45331c;
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #cfb997;
+        padding: 30px;
+
+        #sort {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+
+
+            a {
+                border: 2px solid#503f29;
+                padding: 5px;
+                font-size: 100%;
+            }
+        }
+
+        form {
+            width: 400px;
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+            input {
+                padding: 10px;
+                border: none;
+                background-color: white;
+                font-family: inherit;
+                font-size: inherit
+            }
+            button {
+                padding: 10px;
+                border: none;
+                background-color: #503f29;
+                color: white;
+                font-family: inherit;
+                font-size: inherit
+            }
+        }
+        .task {
+            width: 400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px;
+            background-color: #faf0dc85;
+            text-transform: capitalize;
+            form {
+                input {
+                    padding: 7px;
+                }
+                button {
+                    background-color: rgb(153, 216, 116);
+                }
+            }
+            a {
+                text-decoration: none;
+                color: rgba(0, 0, 0, 0.699);
+                font-size: 80%;
+    
+            }
+        }
+        
+    }
+    .error {
+        color:rgba(0, 0, 0, 0.699);
+    }
+    a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.699);
+        font-size: 80%;
+    }
+}

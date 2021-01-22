@@ -5,7 +5,18 @@ const router = require("./routes/routes")
 const bodyParser = require("body-parser")
 require("dotenv").config();
 
-app.use(express.static("public"))
+var sassMiddleware = require('node-sass-middleware');
+var path = require('path');
+app.use(sassMiddleware({
+    /* Options */
+    src: path.join(__dirname, 'scss'),
+    dest: path.join(__dirname, 'public/style'),
+    debug: true,
+    outputStyle: 'compressed',
+    prefix:  '/style'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+}));
+
+app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: false })) 
 

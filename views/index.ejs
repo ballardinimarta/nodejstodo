@@ -1,22 +1,35 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style/main.css">
+    <script src="https://kit.fontawesome.com/8ba7ccfbdc.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href=<%= csslink %> type="text/css">
 </head>
 <body>
-    <h1>Todo-list</h1>
-    <%- include("./addTask.ejs") %> 
-    <% for (let i = 0; i < data.length; i++) { %>
-        <div>
-            <b><%= data[i].name %></b>
-            <% if (data[i].done == true) { %>
-                <span>done</span>
-            <% } %> 
-            <a href="/delete/<%=data[i]._id%>">Ta bort</a>
-        </div>
-    <% } %>
+    <div id="container">
+        <h1>Todo-list</h1>
+        <%- include("./addTask.ejs") %> 
+        <%- include("./sortTask.ejs") %> 
+        <% for (let i = 0; i < data.length; i++) { %>
+            <div class="task">
+                    <% if (data[i]._id == id) { %>
+                        <%- include("./editTask.ejs") %> 
+                    <% } else { %>
+                        <span>
+                            <%= data[i].name %>
+                        </span>
+                        <span>
+                            <a href="/edit/<%=data[i]._id%>"><i class="far fa-edit"></i></a>
+                            <a href="/delete/<%=data[i]._id%>"><i class="fas fa-times"></i></a>
+                        </span>
+                    <% } %>
+                    
+            
+            </div>
+        <% } %>
+    </div>
 </body>
 </html>
