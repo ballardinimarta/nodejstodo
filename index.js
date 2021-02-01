@@ -13,7 +13,7 @@ app.use(sassMiddleware({
     dest: path.join(__dirname, 'public/style'),
     debug: true,
     outputStyle: 'compressed',
-    prefix:  '/style'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+    prefix:  '/style'
 }));
 
 app.use(express.static('public'))
@@ -24,13 +24,14 @@ app.set("view engine", "ejs")
 
 app.use("/", router)
 
+
 mongoose.connect(process.env.DATABASE_URL, 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }, (err) => {
         if (err) return 
-        app.listen(8000, ()=> {
-        console.log("app is running ") 
+        app.listen(process.env.PORT, ()=> {
+        console.log("app is running") 
     })
 })
