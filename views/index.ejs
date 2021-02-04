@@ -22,7 +22,7 @@
                             <%= data[i].name %>
                         </span>
                         <span>
-                            <a href="/edit/<%=data[i]._id%>"><i class="far fa-edit"></i></a>
+                            <a href="/edit/<%=data[i]._id%>?page=<%=page%>&sort=<%=sorted%>"><i class="far fa-edit"></i></a>
                             <a href="/delete/<%=data[i]._id%>"><i class="fas fa-times"></i></a>
                         </span>
                     <% } %>
@@ -30,7 +30,7 @@
         <% } %>
         <div>
             <% for( let i = 0; i < (count/5); i++ ) { %>
-                <a href="/page=<%= i+1 %> "><%= i+1 %></a>
+                <a href="/?page=<%= i+1 %>&sort=<%=sorted%>"><%= i+1 %></a>
             <% } %>
         </div>
     </div>

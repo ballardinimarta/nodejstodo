@@ -2,11 +2,16 @@ const express = require("express");
 const Task = require("../model/task");
 const router = express.Router();
 
+let sorted = 1;
+let page = 1;
+
 router.get("/", async (req, res) => {
+    sorted = req.query.sort;
+    page = req.query.page;
     try {
         const count = await Task.find();
-        const data = await Task.find().limit(5);
-        res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "/style/main.css", count: count.length})
+        const data = await Task.find().sort({name: sorted}).skip((page-1)*5).limit(5);
+        res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "/style/main.css", count: count.length, page:page, sorted:sorted})
     } catch (error) {
         res.render("error.ejs", {error: error})
     }
@@ -26,13 +31,13 @@ router.post("/", async (req, res) => {
 
 router.get( "/edit/:id", async (req, res) => {
     try {
+        sorted = req.query.sort;
+        page = req.query.page;
+        console.log(sorted, page)
         const task = await Task.findOne({_id: req.params.id})
         const count = await Task.find();
-        const index = count.findIndex(x => x.name === task.name);
-        let page = Math.ceil((index+1)/5)    
-        const data = await Task.find().skip((page-1) * 5).limit(5);
-        res.render("index.ejs", {task: task, id: req.params.id, data:data, error: " ", csslink: "../style/main.css", count: count.length})
-
+        const data = await Task.find().sort({name:sorted}).skip((page-1) * 5).limit(5);
+        res.render("index.ejs", {task: task, id: req.params.id, data:data, error: " ", csslink: "../style/main.css", count: count.length, page:page, sorted:sorted})
     } catch (error) {
         res.render("error.ejs", {error :error}) 
     }
@@ -59,59 +64,5 @@ router.get("/delete/:id", async (req, res) => {
 
     }
 })
-
-router.get("/sort=:id", async (req, res) => {
-    try {
-        if (req.params.id == "name") {
-            const count = await Task.find();
-            const data = await Task.find().sort({name: 1}).limit(5);
-            res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "../../style/main.css", count: count.length})
-
-        } else if (req.params.id == "date") {
-            const count = await Task.find();
-            const data = await Task.find().sort({date: 1}).limit(5);
-            res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "../../style/main.css", count: count.length})
-        }
-        
-    } catch (error) {
-        res.render("error.ejs", {error: error})
-    }
-})
-
-router.get("/page=:id", async (req, res) => {
-    try {
-        const count = await Task.find();
-        const data = await Task.find().skip(Number(req.params.id-1)*5).limit(5);
-        res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "/style/main.css", count:count.length})
-    } catch (error) {
-        res.render("error.ejs", {error: error})
-    }
-   
-})
-
-// router.get('/sort', async (req, res) => {
-//     try {
-//         const count = await Task.find();
-//         let page = Math.ceil((index+1)/5)    
-
-
-//         if (req.query.sort == "name") {
-//             console.log("name")
-//             const count = await Task.find();
-//             const data = await Task.find().sort({name: 1}).skip((page-1) * 5).limit(5);
-//             res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "../../style/main.css", count: count.length})
-
-//         } else if (req.query.sort == "date") {
-//             console.log("sort")
-
-//             const count = await Task.find();
-//             const data = await Task.find().sort({date: 1}).skip((page-1) * 5).limit(5);
-//             res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "../../style/main.css", count: count.length})
-//         }
-        
-//     } catch (error) {
-//         res.render("error.ejs", {error: error})
-//     }
-//   })
 
 module.exports = router;

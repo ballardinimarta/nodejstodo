@@ -32,6 +32,6 @@ mongoose.connect(process.env.DATABASE_URL,
     }, (err) => {
         if (err) return 
         app.listen(process.env.PORT, ()=> {
-        console.log("app is running") 
+        console.log("app is ready at http://localhost:8000") 
     })
 })
