@@ -1,9 +1,10 @@
 <div id="sort">
     <% if (page == null ) { %>
-        <a href="/?page=1&sort=1">Sort A-Z</a>
-        <a href="/?page=1&sort=-1">Sort Z-A</a>
+        <a href="/?page=1&sort=-1">Newest-Oldest</a>
+        <a href="/?page=1&sort=1">Oldest-Newest</a>
     <% } else {%>
-        <a href="/?page=<%=page%>&sort=1">Sort A-Z</a>
-        <a href="/?page=<%=page%>&sort=-1">Sort Z-A</a>
+        <a href="/?page=<%=page%>&sort=-1">Newest-Oldest</a>
+        <a href="/?page=<%=page%>&sort=1">Oldest-Newest</a>
+
     <% } %> 
 </div>

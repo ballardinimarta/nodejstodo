@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     page = req.query.page;
     try {
         const count = await Task.find();
-        const data = await Task.find().sort({name: sorted}).skip((page-1)*5).limit(5);
+        const data = await Task.find().sort({date: sorted}).skip((page-1)*5).limit(5);
         res.render("index.ejs", {task: " ", id: 0, data:data, error: " ", csslink: "/style/main.css", count: count.length, page:page, sorted:sorted})
     } catch (error) {
         res.render("error.ejs", {error: error})
@@ -36,7 +36,7 @@ router.get( "/edit/:id", async (req, res) => {
         console.log(sorted, page)
         const task = await Task.findOne({_id: req.params.id})
         const count = await Task.find();
-        const data = await Task.find().sort({name:sorted}).skip((page-1) * 5).limit(5);
+        const data = await Task.find().sort({date:sorted}).skip((page-1) * 5).limit(5);
         res.render("index.ejs", {task: task, id: req.params.id, data:data, error: " ", csslink: "../style/main.css", count: count.length, page:page, sorted:sorted})
     } catch (error) {
         res.render("error.ejs", {error :error}) 
